@@ -1,5 +1,6 @@
 import 'package:expense_tracking/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -48,7 +49,7 @@ class MyHomePage extends StatelessWidget {
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: Text(
-                  e.amount.toString() + "\$",
+                  '\$${e.amount}',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -68,7 +69,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  e.date.toString(),
+                  DateFormat().format(e.date),
                   style: TextStyle(
                     color: Colors.grey,
                   ),
