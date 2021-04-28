@@ -29,15 +29,17 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Expense Tracking"),
       ),
-      body: Column(
-        children: [
-          Container(
-            child: Card(
-              child: Text("Chart!"),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              child: Card(
+                child: Text("Chart!"),
+              ),
             ),
-          ),
-          UserTransactions(),
-        ],
+            UserTransactions(),
+          ],
+        ),
       ),
     );
   }
