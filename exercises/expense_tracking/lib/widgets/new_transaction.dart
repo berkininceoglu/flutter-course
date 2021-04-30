@@ -9,6 +9,20 @@ class NewTransaction extends StatelessWidget {
 
   NewTransaction(this.addTx);
 
+  void submitTransaction() {
+    final titleInput = titleController.text;
+    final amountInput = double.parse(amountController.text);
+
+    if (titleInput.isEmpty || amountInput <= 0) {
+      return;
+    }
+
+    addTx(
+      titleInput,
+      amountInput,
+    );
+  }
+
   Widget build(BuildContext context) {
     return Container(
       child: Card(
@@ -18,16 +32,16 @@ class NewTransaction extends StatelessWidget {
             TextField(
               decoration: InputDecoration(labelText: "Title"),
               controller: titleController,
+              onSubmitted: (_) => submitTransaction(),
             ),
             TextField(
               decoration: InputDecoration(labelText: "Amount"),
               controller: amountController,
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              onSubmitted: (_) => submitTransaction(),
             ),
             FlatButton(
-              onPressed: () {
-                addTx(
-                    titleController.text, double.parse(amountController.text));
-              },
+              onPressed: submitTransaction,
               child: Text("Add Transaction"),
             )
           ],
