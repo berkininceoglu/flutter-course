@@ -9,3 +9,9 @@ Animations and Fonts are also in the subject.
 One Codebase >> One Widget Tree >> Different Leaves (if Platform.isIOS) ->iOS Subtree
 																		->Android Subtree
 Fixed styling should be a thing to avoid.
+
+final curScaleFactor = MediaQuery.of(context).textScaleFactor 
+=> means how much texts are in the app scaled according to user's device settings.
+
+Code below would be a better solution to give text a font size. =>
+Text('This changes!', style: TextStyle(fontSize: 20 * curScaleFactor));
