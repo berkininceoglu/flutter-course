@@ -15,3 +15,13 @@ final curScaleFactor = MediaQuery.of(context).textScaleFactor
 
 Code below would be a better solution to give text a font size. =>
 Text('This changes!', style: TextStyle(fontSize: 20 * curScaleFactor));
+
+import flutter/services.dart
+void main() {
+	WidgetsFlutterBinding.enstureInitialized();
+	SystemChrome.setPrefferedOrientations([
+		DeviceOrientation.portraitUp,
+		DeviceOrientation.portraitDown,
+		]);
+	runApp(MyApp());
+}
