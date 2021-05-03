@@ -1,0 +1,11 @@
+Responsive: Adapting UI to different devices and screen layouts.
+
+Addaptive: Adapting UI to different OS.
+Android is the flutter's main target since it is developed by Google developers.
+
+Android: Material Design whereas iOS: Cupertino Look
+Animations and Fonts are also in the subject.
+
+One Codebase >> One Widget Tree >> Different Leaves (if Platform.isIOS) ->iOS Subtree
+																		->Android Subtree
+Fixed styling should be a thing to avoid.
