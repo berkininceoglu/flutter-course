@@ -56,51 +56,57 @@ class _NewTransactionState extends State<NewTransaction> {
     return Container(
       child: Card(
         elevation: 5,
-        child: Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(labelText: "Title"),
-              controller: _titleController,
-              onSubmitted: (_) => submitTransaction(),
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: "Amount"),
-              controller: _amountController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => submitTransaction(),
-            ),
-            Container(
-              height: 70,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      _selectedDate == null
-                          ? "No date chosen!"
-                          : 'Picked Date:' +
-                              DateFormat.yMd().format(_selectedDate),
-                    ),
-                  ),
-                  FlatButton(
-                    textColor: Theme.of(context).primaryColor,
-                    onPressed: _presentDatePicker,
-                    child: Text(
-                      "Choose Date",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                TextField(
+                  decoration: InputDecoration(labelText: "Title"),
+                  controller: _titleController,
+                  onSubmitted: (_) => submitTransaction(),
+                ),
+                TextField(
+                  decoration: InputDecoration(labelText: "Amount"),
+                  controller: _amountController,
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  onSubmitted: (_) => submitTransaction(),
+                ),
+                Container(
+                  height: 70,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          _selectedDate == null
+                              ? "No date chosen!"
+                              : 'Picked Date:' +
+                                  DateFormat.yMd().format(_selectedDate),
+                        ),
                       ),
-                    ),
+                      FlatButton(
+                        textColor: Theme.of(context).primaryColor,
+                        onPressed: _presentDatePicker,
+                        child: Text(
+                          "Choose Date",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                FlatButton(
+                  onPressed: submitTransaction,
+                  color: Theme.of(context).primaryColor,
+                  textColor: Theme.of(context).buttonColor,
+                  child: Text("Add Transaction"),
+                )
+              ],
             ),
-            FlatButton(
-              onPressed: submitTransaction,
-              color: Theme.of(context).primaryColor,
-              textColor: Theme.of(context).buttonColor,
-              child: Text("Add Transaction"),
-            )
-          ],
+          ),
         ),
       ),
     );
