@@ -1,0 +1,16 @@
+Flutter is a mobile SDK, built and open sourced by Google.
+
+Flutter apps are written in the programming language called Dart.
+
+Dart supports both just-in=time(JIT) and ahead-of-time (AOT) compiling. AOT compiler changes Dart into native code. Where as JIT compiling allows hot reloading.
+
+Asynchronous and stream-based programming are core features in Dart. These features are used heavily in reactive programming. 
+
+Almost every feature in Dart must fit inside JavaScript semantically.
+
+"My advice to anyone looking for their first job is to build a portfolio that sets you apart. Having a published mobile app with actual users will do that, and it’s easier than ever to achieve with Flutter."
+
+	JavaScript bridge was one of the biggest drawbacks when building cross-platform became a choice. This concept came to life as solution to webview which ran on WebKit(browser rendering engine). Still whenever app needs to communicate with the rendering engine it has to cross that bridge, in a sense every interaction represents crossing the bridge twice. This situation also makes it hard to debug the code and get a smooth performance.
+	As opposed to that Flutter compiles directly to ARM code which is processor used in modern mobile devices and ships with its own rendering engine. In that way app is running natively and does not have to cross any bridge.
+
+Flutter is a reactive, declarative and composable view-layer library.
