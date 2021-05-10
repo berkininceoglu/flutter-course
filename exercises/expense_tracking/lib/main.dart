@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import './models/transaction.dart';
@@ -91,16 +92,29 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
-    final appBar = AppBar(
-      title:
-          Text("Expense Tracking", style: TextStyle(fontFamily: 'Quicksand')),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.add),
-          onPressed: () => _showAddNewTransaction(context),
-        )
-      ],
-    );
+    final PreferredSizeWidget appBar = Platform.isIOS
+        ? CupertinoNavigationBar(
+            middle: Text("Personal Expense"),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  child: Icon(CupertinoIcons.add),
+                  onTap: () => _showAddNewTransaction(context),
+                )
+              ],
+            ),
+          )
+        : AppBar(
+            title: Text("Expense Tracking",
+                style: TextStyle(fontFamily: 'Quicksand')),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () => _showAddNewTransaction(context),
+              )
+            ],
+          );
 
     final trListWidget = Container(
         height: (mediaQuery.size.height -
@@ -108,9 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 mediaQuery.padding.top) *
             0.7,
         child: TransactionList(_userTransactions, _deleteTransaction));
-    return Scaffold(
-      appBar: appBar,
-      body: SingleChildScrollView(
+    var appBody = SafeArea(
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -120,6 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text(
                     "Show Chart",
+                    style: Theme.of(context).textTheme.title,
                   ),
                   Switch.adaptive(
                     activeColor: Theme.of(context).accentColor,
@@ -155,13 +169,23 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Platform.isIOS
-          ? Container()
-          : FloatingActionButton(
-              child: Icon(Icons.add),
-              onPressed: () => _showAddNewTransaction(context),
-            ),
     );
+    return Platform.isIOS
+        ? CupertinoPageScaffold(
+            child: appBody,
+            navigationBar: appBar,
+          )
+        : Scaffold(
+            appBar: appBar,
+            body: appBody,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: Platform.isIOS
+                ? Container()
+                : FloatingActionButton(
+                    child: Icon(Icons.add),
+                    onPressed: () => _showAddNewTransaction(context),
+                  ),
+          );
   }
 }
