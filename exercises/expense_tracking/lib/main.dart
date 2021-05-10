@@ -146,7 +146,6 @@ class _MyHomePageState extends State<MyHomePage> {
                               appBar.preferredSize.height -
                               MediaQuery.of(context).padding.top) *
                           0.7,
-                      width: double.infinity,
                       child: Chart(_recentTransactions),
                     )
                   : trListWidget,
