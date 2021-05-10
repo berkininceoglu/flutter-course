@@ -1,10 +1,12 @@
-import 'package:expense_tracking/widgets/chart.dart';
-import 'package:intl/date_time_patterns.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+
+import './models/transaction.dart';
+
+import './widgets/chart.dart';
 import './widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
-import 'package:flutter/material.dart';
-import './models/transaction.dart';
 
 void main() {
   runApp(MyApp());
@@ -119,7 +121,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   Text(
                     "Show Chart",
                   ),
-                  Switch(
+                  Switch.adaptive(
+                    activeColor: Theme.of(context).accentColor,
                     value: _showChart,
                     onChanged: (val) {
                       setState(() {
@@ -153,10 +156,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _showAddNewTransaction(context),
-      ),
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () => _showAddNewTransaction(context),
+            ),
     );
   }
 }
